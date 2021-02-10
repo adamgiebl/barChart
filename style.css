@@ -1,0 +1,20 @@
+body {
+  background: black;
+}
+
+.container {
+  display: flex;
+  max-width: 600px;
+  margin: auto;
+  height: 96px;
+  align-items: flex-end;
+  margin-top: 100px;
+}
+
+.bar {
+  width: 50px;
+  height: 50px;
+  background: greenyellow;
+  border: 1px solid black;
+  transition: height 0.3s;
+}
