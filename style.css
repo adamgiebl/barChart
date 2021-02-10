@@ -16,5 +16,5 @@ body {
   height: 50px;
   background: greenyellow;
   border: 1px solid black;
-  transition: height 0.3s;
+  transition: all 0.3s;
 }

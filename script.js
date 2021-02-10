@@ -1,7 +1,5 @@
 "use strict";
 
-const container = document.querySelector(".container");
-
 const getNumberOfCustomers = () => {
   return Math.floor(Math.random() * 32);
 };
@@ -11,35 +9,59 @@ const getColor = (value) => {
   return `linear-gradient(hsl(${hue - 20},100%, 50%), hsl(${hue},100%, 50%))`;
 };
 
-const bars = [];
-const array = [];
-for (let i = 0; i < 40; i++) {
+const traslateValue = (value) => value * 3;
+
+const updateBar = (bar, value) => {
+  const ajdustedValue = traslateValue(value);
+  bar.style.background = getColor(ajdustedValue);
+  bar.style.height = ajdustedValue + "px";
+};
+
+const createBar = (value) => {
   const div = document.createElement("div");
   div.classList.add("bar");
-  const number = getNumberOfCustomers();
-  div.style.height = number * 3 + "px";
-  container.appendChild(div);
-  array.push(number);
-  bars.push(div);
-}
-console.log(array);
+  div.style.height = value * 3 + "px";
+  return div;
+};
 
-const renderBars = (array) => {
-  for (let i = 0; i < array.length; i++) {
-    const value = array[i] * 3;
-    bars[i].style.background = getColor(value);
-    bars[i].style.height = value + "px";
+const generateInitialBars = (container, bars, values) => {
+  for (let i = 0; i < 40; i++) {
+    const value = getNumberOfCustomers();
+    const bar = createBar(value);
+    container.appendChild(bar);
+    values.push(value);
+    bars.push(bar);
   }
 };
 
-setInterval(() => {
-  const queueSize = getNumberOfCustomers();
-
-  array.push(queueSize);
-
-  if (array.length >= 40) {
-    array.shift();
+const updateBars = (bars, values) => {
+  for (let i = 0; i < values.length; i++) {
+    updateBar(bars[i], values[i]);
   }
+};
 
-  renderBars(array);
-}, 1000);
+const runUpdateLoop = (bars, values) => {
+  setInterval(() => {
+    const queueSize = getNumberOfCustomers();
+
+    values.push(queueSize);
+
+    if (values.length >= 40) {
+      values.shift();
+    }
+
+    updateBars(bars, values);
+  }, 1000);
+};
+
+function init() {
+  const container = document.querySelector(".container");
+  const bars = [];
+  const values = [];
+
+  generateInitialBars(container, bars, values);
+
+  runUpdateLoop(bars, values);
+}
+
+init();
