@@ -7,7 +7,8 @@ body {
   max-width: 580px;
   overflow: hidden;
 }
-.container {
+.container,
+.container-reflection {
   display: flex;
   width: 600px;
   margin: auto;
@@ -16,11 +17,26 @@ body {
   align-items: flex-end;
   margin-top: 100px;
   animation: slide 0.3s infinite linear;
+  position: relative;
+}
+
+.outer-container--reflection {
+  transform: perspective(400px) rotateX(217deg) scale(1.22) translateY(26px);
+  opacity: 0.5;
+}
+.container-reflection::before {
+  content: "";
+  width: inherit;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.123), black 60%);
+  z-index: 1;
 }
 
 .bar {
   width: 15px;
   height: 50px;
+  min-height: 1px;
   background: greenyellow;
   border: 1px solid black;
 }

@@ -24,13 +24,22 @@ const createBar = (value) => {
   return div;
 };
 
-const generateInitialBars = (container, bars, values) => {
+const generateInitialBars = (
+  container,
+  containerReflection,
+  bars,
+  bars2,
+  values
+) => {
   for (let i = 0; i < 40; i++) {
     const value = getNumberOfCustomers();
     const bar = createBar(value);
+    const bar2 = createBar(value);
     container.appendChild(bar);
+    containerReflection.appendChild(bar2);
     values.push(value);
     bars.push(bar);
+    bars2.push(bar2);
   }
 };
 
@@ -40,9 +49,8 @@ const updateBars = (bars, values) => {
   }
 };
 
-const runUpdateLoop = (bars, values, outerContainer) => {
+const runUpdateLoop = (bars, bars2, values, outerContainer) => {
   outerContainer.addEventListener("animationiteration", () => {
-    console.log("animation end");
     const queueSize = getNumberOfCustomers();
 
     values.push(queueSize);
@@ -52,17 +60,20 @@ const runUpdateLoop = (bars, values, outerContainer) => {
     }
 
     updateBars(bars, values);
+    updateBars(bars2, values);
   });
 };
 
 function init() {
   const container = document.querySelector(".container");
+  const containerReflection = document.querySelector(".container-reflection");
   const bars = [];
+  const bars2 = [];
   const values = [];
 
-  generateInitialBars(container, bars, values);
+  generateInitialBars(container, containerReflection, bars, bars2, values);
 
-  runUpdateLoop(bars, values, container);
+  runUpdateLoop(bars, bars2, values, container);
 }
 
 init();
