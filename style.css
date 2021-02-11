@@ -21,7 +21,7 @@ body {
 }
 
 .outer-container--reflection {
-  transform: perspective(400px) rotateX(217deg) scale(1.22) translateY(26px);
+  transform: perspective(400px) rotateX(217deg) scale(1.23) translateY(26px);
   opacity: 0.5;
 }
 .container-reflection::before {
