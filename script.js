@@ -41,6 +41,8 @@ const generateInitialBars = (
     bars.push(bar);
     bars2.push(bar2);
   }
+  updateBars(bars, values);
+  updateBars(bars2, values);
 };
 
 const updateBars = (bars, values) => {
