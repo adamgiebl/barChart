@@ -2,19 +2,34 @@ body {
   background: black;
 }
 
+.outer-container {
+  margin: auto;
+  max-width: 580px;
+  overflow: hidden;
+}
 .container {
   display: flex;
-  max-width: 600px;
+  width: 600px;
+  margin: auto;
   margin: auto;
   height: 96px;
   align-items: flex-end;
   margin-top: 100px;
+  animation: slide 0.3s infinite linear;
 }
 
 .bar {
-  width: 50px;
+  width: 15px;
   height: 50px;
   background: greenyellow;
   border: 1px solid black;
-  transition: all 0.3s;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-15px);
+  }
 }

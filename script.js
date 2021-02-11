@@ -40,8 +40,9 @@ const updateBars = (bars, values) => {
   }
 };
 
-const runUpdateLoop = (bars, values) => {
-  setInterval(() => {
+const runUpdateLoop = (bars, values, outerContainer) => {
+  outerContainer.addEventListener("animationiteration", () => {
+    console.log("animation end");
     const queueSize = getNumberOfCustomers();
 
     values.push(queueSize);
@@ -51,7 +52,7 @@ const runUpdateLoop = (bars, values) => {
     }
 
     updateBars(bars, values);
-  }, 1000);
+  });
 };
 
 function init() {
@@ -61,7 +62,7 @@ function init() {
 
   generateInitialBars(container, bars, values);
 
-  runUpdateLoop(bars, values);
+  runUpdateLoop(bars, values, container);
 }
 
 init();
